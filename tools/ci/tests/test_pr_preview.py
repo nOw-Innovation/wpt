@@ -268,7 +268,7 @@ def deploy(pr_num, revision, expected_github_traffic, expected_preview_traffic):
     preview_port = preview_server.server_address[1]
 
     method_threw = False
-    with temp_repo() as repo, github_server, preview_server:
+    with temp_repo(), github_server, preview_server:
         project = pr_preview.Project(
             'http://{}:{}'.format(TEST_HOST, github_port),
             'test-org/test-repo',
