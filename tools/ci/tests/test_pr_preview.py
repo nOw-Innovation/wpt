@@ -232,8 +232,8 @@ def update_mirror_refs(pull_request, expected_traffic, refs={}):
             ['git', 'remote', '-v'], cwd=local_repo
         )
         project = pr_preview.Project(
-                'http://{}:{}'.format(TEST_HOST, github_port),
-                'test-org/test-repo',
+            'http://{}:{}'.format(TEST_HOST, github_port),
+            'test-org/test-repo',
         )
         remote = pr_preview.Remote('test-org/test-repo')
         try:
@@ -270,11 +270,11 @@ def deploy(pr_num, revision, expected_github_traffic, expected_preview_traffic):
     method_threw = False
     with temp_repo() as repo, github_server, preview_server:
         project = pr_preview.Project(
-                'http://{}:{}'.format(TEST_HOST, github_port),
-                'test-org/test-repo',
+            'http://{}:{}'.format(TEST_HOST, github_port),
+            'test-org/test-repo',
         )
         target = 'http://{}:{}'.format(TEST_HOST, preview_port)
-        pull_request = { 'number': pr_num }
+        pull_request = {'number': pr_num}
         timeout = 1
         try:
             pr_preview.deploy(project, target, pull_request, revision, timeout)
@@ -385,7 +385,7 @@ def test_update_mirror_refs_ignore_untrusted_contributor():
 
     method_threw, actual_traffic, remote_refs = update_mirror_refs(
         pull_request, expected_traffic
-    )   
+    )
 
     assert not method_threw
     assert same_members(expected_traffic, actual_traffic)
@@ -409,7 +409,7 @@ def test_update_mirror_refs_trusted_contributor():
 
     method_threw, actual_traffic, remote_refs = update_mirror_refs(
         pull_request, expected_traffic
-    )   
+    )
 
     assert not method_threw
     assert same_members(expected_traffic, actual_traffic)
@@ -433,7 +433,7 @@ def test_synchronize_sync_bot_with_label():
 
     method_threw, actual_traffic, remote_refs = update_mirror_refs(
         pull_request, expected_traffic
-    )   
+    )
 
     assert not method_threw
     assert same_members(expected_traffic, actual_traffic)
@@ -460,7 +460,7 @@ def test_update_mirror_refs_update_collaborator():
 
     method_threw, actual_traffic, remote_refs = update_mirror_refs(
         pull_request, expected_traffic, refs
-    )   
+    )
 
     assert not method_threw
     assert same_members(expected_traffic, actual_traffic)
@@ -487,7 +487,7 @@ def test_synchronize_update_member():
 
     method_threw, actual_traffic, remote_refs = update_mirror_refs(
         pull_request, expected_traffic, refs
-    )   
+    )
 
     assert not method_threw
     assert same_members(expected_traffic, actual_traffic)
@@ -509,7 +509,7 @@ def test_update_mirror_refs_delete_collaborator():
 
     method_threw, actual_traffic, remote_refs = update_mirror_refs(
         pull_request, expected_traffic, refs
-    )   
+    )
 
     assert not method_threw
     assert same_members(expected_traffic, actual_traffic)
